@@ -1,0 +1,26 @@
+parameters:
+    sketchthat_two_factor.google.class: Google\Authenticator\GoogleAuthenticator
+    sketchthat_two_factor.google.provider.class: Sketchthat\TwoFactorBundle\Helper\Authentication\Helper
+    sketchthat_two_factor.google.security_interactive_login_listener.class: Sketchthat\TwoFactorBundle\Listener\Security\LoginListener
+    sketchthat_two_factor.google.core_request_listener.class: Sketchthat\TwoFactorBundle\Listener\Security\RequestListener
+
+
+services:
+    sketchthat_two_factor.google:
+        class: %sketchthat_two_factor.google.class%
+
+    sketchthat_two_factor.google.provider:
+        class: %sketchthat_two_factor.google.provider.class%
+        arguments: [%server_name%, @sketchthat_two_factor.google]
+
+    sketchthat_two_factor.google.interactive_login_listener:
+        class: %sketchthat_two_factor.google.security_interactive_login_listener.class%
+        arguments: [@sketchthat_two_factor.google.provider]
+        tags:
+          - { name: kernel.event_listener, event: security.interactive_login, method: onSecurityInteractiveLogin }
+
+    sketchthat_two_factor.google.request_listener:
+        class: %sketchthat_two_factor.google.core_request_listener.class%
+        arguments: [@sketchthat_two_factor.google.provider, @security.context, @templating, @router]
+        tags:
+          - { name: kernel.event_listener, event: kernel.request, method: onCoreRequest, priority: -1 }

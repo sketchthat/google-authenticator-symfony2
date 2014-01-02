@@ -1,0 +1,28 @@
+security:
+    providers:
+        main:
+            entity: { class: Sketchthat\TwoFactorBundle\Entity\Users, property: username }
+    encoders:
+        Sketchthat\TwoFactorBundle\Entity\Users:
+            algorithm:        sha1
+            encode_as_base64: false
+            iterations:       1
+    firewalls:
+        dev:
+            pattern:  ^/(_(profiler|wdt)|css|images|js)/
+            security: false
+
+        main:
+            pattern: ^/
+            anonymous: ~
+            switch_user: true
+            form_login:
+                login_path:   /login
+                check_path:   /login_check
+            logout:
+                path: /logout
+                target:   /
+    access_control:
+        - { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/register, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/, roles: ROLE_USER }

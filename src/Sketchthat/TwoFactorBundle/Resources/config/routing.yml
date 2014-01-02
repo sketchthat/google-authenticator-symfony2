@@ -1,0 +1,23 @@
+login:
+    pattern:   login
+    defaults:  { _controller: SketchthatTwoFactorBundle:Authentication:login }
+
+login_check:
+    pattern:   login_check
+
+logout:
+    pattern:   logout
+
+register:
+    pattern:   register
+    defaults:  { _controller: SketchthatTwoFactorBundle:Authentication:register }
+
+
+dashboard:
+    pattern:   /
+    defaults:  { _controller: SketchthatTwoFactorBundle:Default:dashboard }
+
+toggle_authenticator:
+    pattern:   /toggle
+    defaults:  { _controller: SketchthatTwoFactorBundle:Default:toggle }
+

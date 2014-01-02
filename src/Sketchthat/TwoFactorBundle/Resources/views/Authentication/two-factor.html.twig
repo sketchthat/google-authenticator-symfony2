@@ -1,0 +1,18 @@
+{% extends '::base.html.twig' %}
+
+{% block body %}
+    <div class="row">
+        <div class="col-md-6 col-md-offset-3">
+            <h3>Google Authenticator Code</h3>
+            <form method="post" action="">
+                <div>
+                    <label for="auth_code">Google Authenticator Code</label>
+                    <input type="text" name="auth_code" autocomplete="off" class="form-control" id="auth_code">
+                </div>
+                <div>
+                    <input type="submit" name="submit" value="Continue" class="btn btn-primary">
+                </div>
+            </form>
+        </div>
+    </div>
+{% endblock %}

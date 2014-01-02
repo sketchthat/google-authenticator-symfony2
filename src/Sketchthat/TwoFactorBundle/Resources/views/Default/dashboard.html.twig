@@ -1,0 +1,21 @@
+{% extends '::base.html.twig' %}
+
+{% block body %}
+    {% if status == 0 %}
+        <div class="alert alert-danger">
+            Two Factor Authentication is <em>disabled</em>
+        </div>
+        <div class="text-center">
+            <p>Scan the QR code with the Google Authenticator Application</p>
+            <img src="{{ qr }}" width="200" height="200" alt="Scan with Google Authenticator Application">
+            <p><a href="{{ path('toggle_authenticator') }}" class="btn btn-success">Enable Authenticator</a></p>
+        </div>
+    {% elseif status == 1 %}
+        <div class="alert alert-success">
+            Two Factor Authentication is <em>enabled</em>
+        </div>
+        <div class="text-center">
+            <a href="{{ path('toggle_authenticator') }}" class="btn btn-danger">Disabled Authenticator</a>
+        </div>
+    {% endif %}
+{% endblock %}

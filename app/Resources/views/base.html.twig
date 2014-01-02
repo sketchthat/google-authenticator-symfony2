@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Google Two Factor Authentication example for Symfony2.">
+    <meta name="author" content="Michael Kimpton @sketchthat">
+
+    <title>Google Two Factor Authentication</title>
+
+    {% stylesheets '@SketchthatTwoFactorBundle/Resources/public/css/*' filter='cssrewrite' %}
+        <link rel="stylesheet" href="{{ asset_url }}" />
+    {% endstylesheets %}
+
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+</head>
+
+<body>
+    <div class="container">
+        {% if is_granted('ROLE_USER') %}
+        <div class="pull-right">
+            <a href="{{ path('logout') }}" class="btn btn-default">Logout</a>
+        </div>
+        {% endif %}
+        <div class="page-header">
+            <h1>Google Authenticator</h1>
+            <p class="lead">Google Authenticator example for the <a href="http://symfony.com/" target="_blank">Symfony2 Framework</a></p>
+        </div>
+
+        {% for flashMessage in app.session.flashbag.get('notice') %}
+            <div class="alert alert-info">
+                {{ flashMessage }}
+            </div>
+        {% endfor %}
+
+        {% for flashMessage in app.session.flashbag.get('error') %}
+            <div class="alert alert-danger">
+                {{ flashMessage }}
+            </div>
+        {% endfor %}
+
+        {% block body %}
+
+        {% endblock %}
+    </div>
+
+{% javascripts '@SketchthatTwoFactorBundle/Resources/public/js/*' %}
+    <script type="text/javascript" src="{{ asset_url }}"></script>
+{% endjavascripts %}
+</body>
+</html>

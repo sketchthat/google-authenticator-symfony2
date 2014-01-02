@@ -1,0 +1,4 @@
+sketchthat_two_factor:
+    resource: "@SketchthatTwoFactorBundle/Resources/config/routing.yml"
+    prefix:   /
+
